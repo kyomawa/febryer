@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Git Conventions
 
-## Getting Started
+## Branch Strategy
 
-First, run the development server:
+Nous avons deux branches principales :
+
+- **main** : Branche pour le code en production.
+- **dev** : Branche pour le développement actif, où toutes les nouvelles fonctionnalités sont fusionnées avant d'intégrer `main`.
+
+Chaque membre de l'équipe doit créer une branche de développement personnelle nommée selon le modèle `dev-votreNom` (exemple : `dev-bryan`). Vous pusherez ensuite vos changements sur la branche `dev`.
+
+## Commit Messages
+
+Les messages de commit doivent suivre une convention stricte pour faciliter la gestion du projet et la lisibilité des changements. Utilisez l'un des types de commit suivants :
+
+- `feat` : Ajout d'une nouvelle fonctionnalité.
+- `fix` : Correction d'un bug.
+- `docs` : Modifications de la documentation.
+- `style` : Changements de style (formatage, espaces, etc.).
+- `refactor` : Refactorisation du code sans ajout de fonctionnalité ni correction de bug.
+- `test` : Ajout ou modification de tests.
+- `chore` : Tâches de maintenance ou modifications de configuration.
+
+### Exemples de commit :
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+feat: ajouter la fonctionnalité de paiement
+fix: corriger le bug d'affichage sur la page produit
+docs: mettre à jour le guide de contribution
