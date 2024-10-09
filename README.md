@@ -4,8 +4,11 @@
 
 Nous avons deux branches principales :
 
-- **main** : Branche pour le code en production.
-- **dev** : Branche pour le développement actif, où toutes les nouvelles fonctionnalités sont fusionnées avant d'intégrer `main`.
+- **main** : Branche pour le code en production.  
+  Lien : [https://febryer.fr](https://febryer.fr)
+
+- **dev** : Branche pour le développement actif, où toutes les nouvelles fonctionnalités sont fusionnées avant d'intégrer `main`.  
+  Lien : [https://dev.febryer.fr](https://dev.febryer.fr)
 
 Chaque membre de l'équipe doit créer une branche de développement personnelle nommée selon le modèle `dev-votreNom` (exemple : `dev-bryan`). Vous pusherez ensuite vos changements sur la branche `dev`.
 
