@@ -1,0 +1,31 @@
+{
+  "name": "Febryer - Application",
+  "short_name": "Febryer",
+  "description": "Connectez-vous à votre compte pour accéder à votre espace personnel sur Febryer.",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#6066ac",
+  "theme_color": "#FAFAFA",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

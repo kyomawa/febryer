@@ -2,26 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  a {
+    @apply focus-visible:outline-none focus-visible:outline-offset-0;
+  }
+  html {
+    @apply 2k:text-[18.5px] 4k:text-[24px] 8k:text-[32px] 10k:text-[40px] 12k:text-[48px] 14k:text-[64px] 16k:text-[72px];
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply selection:bg-primary-600 dark:selection:bg-primary-800 [&::-webkit-scrollbar-thumb]:bg-primary-600 dark:[&::-webkit-scrollbar-thumb]:bg-primary-700 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar]:w-1.5;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .specialContainer {
+    @apply mx-auto w-full px-4 md:px-8 2xl:w-[80vw];
+  }
+  .customHorizontalScrollbar {
+    @apply [&::-webkit-scrollbar-thumb]:bg-primary-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:h-1.5;
+  }
+  .customVerticalScrollbar {
+    @apply [&::-webkit-scrollbar-thumb]:bg-primary-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-1.5;
   }
 }
