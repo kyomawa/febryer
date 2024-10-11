@@ -30,7 +30,7 @@ export default function WebAppLayout({
           <meta
             name="theme-color"
             media="(prefers-color-scheme: dark)"
-            content="#190808"
+            content="#0A0B12"
           />
           {/* Loading Bar */}
           <NextTopLoader color="#6a72c1" zIndex={10} showSpinner={false} />
