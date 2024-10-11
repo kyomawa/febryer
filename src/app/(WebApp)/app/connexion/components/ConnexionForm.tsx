@@ -31,6 +31,7 @@ export default function ConnexionForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof schemaLoginForm>) => {
+    const toastId: string = toast.loading("Connexion en cours...");
     try {
       setIsLoading(true);
       const formData = new FormData();
@@ -40,13 +41,15 @@ export default function ConnexionForm() {
       const response = await login(formData);
 
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message, { id: toastId });
         router.replace("/app/services");
       } else {
-        toast.error(response.message);
+        toast.error(response.message, { id: toastId });
       }
     } catch (error) {
-      toast.error("Une erreur est survenue lors de la connexion.");
+      toast.error("Une erreur est survenue lors de la connexion.", {
+        id: toastId,
+      });
     } finally {
       setIsLoading(false);
     }

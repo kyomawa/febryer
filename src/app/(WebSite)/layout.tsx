@@ -24,7 +24,7 @@ export default function WebsiteLayout({
           {/* Manifest of the website */}
           <link rel="manifest" href="/manifests/manifest.json" />
           {/* Loading Bar */}
-          <NextTopLoader color="#c24040" speed={225} showSpinner={false} />
+          <NextTopLoader color="#6a72c1" speed={225} showSpinner={false} />
           {/* Content of the website */}
           <SmoothScroll>
             <div className="flex min-h-screen flex-col gap-y-8">

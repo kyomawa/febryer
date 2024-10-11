@@ -1,10 +1,15 @@
-import { NavbarLinkProps } from "./types";
+import { CalendarCheck, Handshake, Settings } from "lucide-react";
+import { NavbarLinkProps, SidebarLinkProps } from "./types";
 
-// ==========================================================================================================
+// =============================================================================================================================================
+
+export const webAppUrl = "/app/";
+
+// =============================================================================================================================================
 
 export const navbarLinks: NavbarLinkProps[] = [
   { path: "/", label: "Accueil" },
-  { path: "/boutique", label: "Boutique" },
+  { path: "/reservations", label: "Réserver" },
   { path: "/contact", label: "Contact" },
 ];
 
@@ -20,3 +25,13 @@ export const ACCEPTED_FILE_TYPES = [
 ];
 
 // =============================================================================================================================================
+
+export const sidebarLinks: SidebarLinkProps[] = [
+  { path: `${webAppUrl}services`, label: "Services", icon: <Handshake /> },
+  {
+    path: `${webAppUrl}reservations`,
+    label: "Réservations",
+    icon: <CalendarCheck />,
+  },
+  { path: `${webAppUrl}parametres`, label: "Paramètres", icon: <Settings /> },
+];

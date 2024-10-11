@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import "../globals.css";
+import type { Metadata } from "next";
 import { montserrat, roboto } from "../../fonts/fonts";
 import { commonWebAppMetadata } from "@/constants/metadatas";
-import { Toaster } from "react-hot-toast";
 import { ViewTransitions } from "next-view-transitions";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = commonWebAppMetadata;
 
@@ -18,7 +18,7 @@ export default function WebAppLayout({
     <ViewTransitions>
       <html lang="fr">
         <body
-          className={`${montserrat.variable} ${roboto.variable} ${montserrat.className} dark:bg-primary-1050 bg-neutral-50 text-black antialiased dark:text-white`}
+          className={`${montserrat.variable} ${roboto.variable} ${montserrat.className} bg-neutral-50 text-black antialiased dark:bg-primary-1050 dark:text-white`}
         >
           {/* Manifest of the website */}
           <link rel="manifest" href="/manifests/manifestapp.json" />
@@ -33,7 +33,7 @@ export default function WebAppLayout({
             content="#190808"
           />
           {/* Loading Bar */}
-          <NextTopLoader color="#c24040" zIndex={10} showSpinner={false} />
+          <NextTopLoader color="#6a72c1" zIndex={10} showSpinner={false} />
           {/* Content of the website */}
           <ThemeProvider
             attribute="class"
@@ -42,7 +42,12 @@ export default function WebAppLayout({
             disableTransitionOnChange
           >
             {children}
-            <Toaster />
+            <Toaster
+              toastOptions={{
+                className:
+                  "dark:bg-primary-900 bg-neutral-50 dark:text-white text-black",
+              }}
+            />
           </ThemeProvider>
         </body>
       </html>

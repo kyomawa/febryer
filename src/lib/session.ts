@@ -4,6 +4,8 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+// =========================================================================================================================================
+
 type SessionPayload = {
   userId: string;
   expires: Date;
@@ -92,3 +94,5 @@ export function deleteSession() {
   cookies().delete("session");
   redirect("/connexion");
 }
+
+// =========================================================================================================================================

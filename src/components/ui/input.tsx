@@ -10,6 +10,7 @@ const inputVariants = cva(
       variant: {
         default:
           "border border-slate-200 bg-white ring-offset-white placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-slate-950 focus-visible:ring-offset-1 dark:border-primary-100/20 dark:bg-primary-1000 dark:text-neutral-10 dark:placeholder:text-primary-100/65 dark:focus-visible:ring-slate-300 dark:ring-offset-primary-100/75",
+        contentHeader: "h-10 pl-10 w-96 bg-black/5 dark:bg-white/10",
         file: "cursor-pointer dark:bg-primary-1000 border dark:border-primary-100/20 border-neutral-200 px-1.5 py-1.5 file:mr-4 file:cursor-pointer file:rounded file:border-0 file:bg-primary-400 dark:file:bg-primary-800 file:px-4 file:py-1 file:font-merriweather file:text-sm file:text-primary-1050 dark:file:text-white hover:file:bg-primary-500 dark:hover:file:bg-primary-900 file:transition-colors file:duration-200",
       },
     },
