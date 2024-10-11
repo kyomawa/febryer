@@ -12,23 +12,32 @@ model User {
   name      String
   email     String   @unique
   password  String
-  role      Role     @default(CLIENT)
+  createdAt DateTime @default(now())
+}
+
+model Client {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  phone     String
+  address   String
+  message   String
   createdAt DateTime @default(now())
 
   bookings Booking[]
 }
 
 model Booking {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String        @id @default(auto()) @map("_id") @db.ObjectId
   startTime DateTime
   endTime   DateTime
-  status    String   @default("pending")
-  createdAt DateTime @default(now())
+  status    BookingStatus @default(PENDING)
+  createdAt DateTime      @default(now())
 
-  userId    String  @db.ObjectId
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   service   Service @relation(fields: [serviceId], references: [id])
   serviceId String  @db.ObjectId
+  client    Client? @relation(fields: [clientId], references: [id])
+  clientId  String? @db.ObjectId
 }
 
 model Service {
@@ -38,10 +47,11 @@ model Service {
   price       Float
   createdAt   DateTime @default(now())
 
-  Booking Booking[]
+  bookings Booking[]
 }
 
-enum Role {
-  ADMIN
-  CLIENT
+enum BookingStatus {
+  PENDING
+  ACCEPTED
+  REFUSED
 }

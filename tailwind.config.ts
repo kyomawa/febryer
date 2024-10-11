@@ -36,12 +36,14 @@ const config: Config = {
         xs: "400px",
         "3xl": "1700px",
         "2k": "1921px",
-        "4k": "2561px",
-        "8k": "3841px",
-        "10k": "5121px",
-        "12k": "6401px",
-        "14k": "7681px",
-        "16k": "10241px",
+        "3k": "2561px",
+        "4k": "3073px",
+        "4.5k": "3458px",
+        "5k": "3841px",
+        "6k": "5121px",
+        "8k": "6017px",
+        "10k": "7681px",
+        "12k": "10241px",
       },
       keyframes: {
         loading: {
@@ -51,11 +53,6 @@ const config: Config = {
       },
       animation: {
         loading: "loading 4.25s linear infinite",
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
     },
   },

@@ -131,3 +131,35 @@ export const connexionMetadata: Metadata = {
 };
 
 // ==========================================================================================================
+
+export const dashboardMetadata: Metadata = {
+  title: "Tableau de bord",
+  description: "Visualiser les statistiques et l'état global des réservations.",
+  keywords: "Febryer Application, tableau de bord, statistiques",
+};
+
+// ==========================================================================================================
+
+export const servicesMetadata: Metadata = {
+  title: "Services",
+  description: "Ajouter ou modifier les différents services de Febryer.",
+  keywords: "Febryer Application, services, espace utilisateur",
+};
+
+// ==========================================================================================================
+
+export const reservationsMetadata: Metadata = {
+  title: "Réservations",
+  description: "Consulter et gérer les réservations des clients.",
+  keywords: "Febryer Application, réservations, gestion des réservations",
+};
+
+// ==========================================================================================================
+
+export const settingsMetadata: Metadata = {
+  title: "Paramètres",
+  description: "Gérer vos paramètres de compte.",
+  keywords: "Febryer Application, paramètres, espace utilisateur",
+};
+
+// ==========================================================================================================

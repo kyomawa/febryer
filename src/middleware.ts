@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   const urlsAllowed = ["/app/connexion"];
 
   if (session && url === "/app/connexion") {
-    return NextResponse.redirect(new URL("/app", request.url));
+    return NextResponse.redirect(new URL("/app/services", request.url));
   }
 
   if (!session && url.startsWith("/app") && !urlsAllowed.includes(url)) {
@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (session && url === "/app") {
-    return NextResponse.redirect(new URL("/app", request.url));
+    return NextResponse.redirect(new URL("/app/services", request.url));
   }
 
   return NextResponse.next();
