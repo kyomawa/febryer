@@ -41,13 +41,15 @@ export default function SettingsProfileEmailForm({
     values: z.infer<typeof schemaUpdateUserProfileEmailForm>,
   ) => {
     setIsLoading(true);
+    const toastId: string = toast.loading("Modification du mail en cours...");
+
     const formData = createFormData(values);
     const response = await updateUserProfileEmail(formData);
     if (response.success) {
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
       setIsDisabled(true);
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { id: toastId });
     }
     setIsLoading(false);
   };

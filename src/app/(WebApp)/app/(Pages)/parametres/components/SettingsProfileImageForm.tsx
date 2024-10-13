@@ -46,15 +46,18 @@ export default function SettingsProfileImageForm({
     values: z.infer<typeof schemaUpdateUserProfileImageForm>,
   ) => {
     setIsLoading(true);
+    const toastId: string = toast.loading(
+      "Modification de l'image en cours...",
+    );
     const imageFile = compressedFile || values.image;
     const formData = createFormData({
       image: imageFile,
     });
     const response = await updateUserImageProfile(formData);
     if (response.success) {
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { id: toastId });
     }
     setIsLoading(false);
   };

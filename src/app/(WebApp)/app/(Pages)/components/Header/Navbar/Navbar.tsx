@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import CldImage from "@/components/CldImage";
 import SidebarMobile from "../../Sidebars/SidebarMobile";
 import { webAppUrl } from "@/constants/data";
+import toast from "react-hot-toast";
 
 type NavbarProps = {
   image: string | null;
@@ -75,8 +76,10 @@ function UserProfile({ image, name }: UserProfileProps) {
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   const handleLogout = async () => {
+    toast.loading("Déconnexion en cours...");
     setShowDropdown(!showDropdown);
     await logout();
+    toast.dismiss();
     location.reload();
   };
 

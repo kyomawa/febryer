@@ -1,6 +1,6 @@
 "use server";
 
-import { unstable_cache } from "next/cache";
+import { revalidateTag, unstable_cache } from "next/cache";
 import prisma from "@/lib/prisma";
 import { deleteSession, ensureAuthenticated } from "@/lib/session";
 import { User } from "@prisma/client";
@@ -108,6 +108,8 @@ export const updateUserImageProfile = async (
     };
   }
 
+  revalidateTag("connectedUser");
+
   return {
     success: true,
     message: `Image de profil mise à jour avec succès.`,
@@ -148,6 +150,8 @@ export const updateUserProfileName = async (
         "Une erreur est survenue lors de la mise à jour de l'utilisateur.",
     };
   }
+
+  revalidateTag("connectedUser");
 
   return {
     success: true,
@@ -190,6 +194,8 @@ export const updateUserProfileEmail = async (
     };
   }
 
+  revalidateTag("connectedUser");
+
   return {
     success: true,
     message: `Vote email a été mis à jour avec succès.`,
@@ -230,6 +236,8 @@ export const updateUserProfilePassword = async (
         "Une erreur est survenue lors de la mise à jour de l'utilisateur.",
     };
   }
+
+  revalidateTag("connectedUser");
 
   return {
     success: true,

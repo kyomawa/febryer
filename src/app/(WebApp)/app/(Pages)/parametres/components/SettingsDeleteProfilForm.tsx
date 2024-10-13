@@ -24,12 +24,13 @@ export default function SettingsDeleteProfilForm() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = async () => {
+    const toastId: string = toast.loading("Suppression du profil en cours...");
     setIsLoading(true);
     const response = await deleteConnectedUser();
     if (response.success) {
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { id: toastId });
     }
     setIsLoading(false);
   };

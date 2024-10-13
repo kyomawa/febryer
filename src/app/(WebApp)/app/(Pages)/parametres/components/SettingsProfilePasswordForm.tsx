@@ -34,13 +34,16 @@ export default function SettingsProfilePasswordForm() {
     values: z.infer<typeof schemaUpdateUserProfilePasswordForm>,
   ) => {
     setIsLoading(true);
+    const toastId: string = toast.loading(
+      "Modification du mot de passe en cours...",
+    );
     const formData = createFormData(values);
     const response = await updateUserProfilePassword(formData);
     if (response.success) {
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
       setIsDisabled(true);
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { id: toastId });
     }
     setIsLoading(false);
   };

@@ -41,13 +41,14 @@ export default function SettingsProfileNameForm({
     values: z.infer<typeof schemaUpdateUserProfileNameForm>,
   ) => {
     setIsLoading(true);
+    const toastId: string = toast.loading("Modification du nom en cours...");
     const formData = createFormData(values);
     const response = await updateUserProfileName(formData);
     if (response.success) {
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
       setIsDisabled(true);
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { id: toastId });
     }
     setIsLoading(false);
   };
