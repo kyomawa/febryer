@@ -44,7 +44,12 @@ export default function ContentHeader<T>({
       <div
         className={cn(
           "flex items-center gap-x-3",
-          !searchContent && !layoutActive && !modal && !filterBtn && "hidden",
+          !searchContent &&
+            !layoutActive &&
+            !modal &&
+            !filterBtn &&
+            !refreshTagNameButton &&
+            "hidden",
         )}
       >
         {/* SearchBar */}
