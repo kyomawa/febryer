@@ -2,6 +2,10 @@ import { homeMetadata } from "@/constants/metadatas";
 import Image from "next/image";
 import Banner from "./components/Banner/Banner";
 import CallToAction from "./components/CallToAction/CallToAction";
+import Title from "./components/Title/Title";
+import Card from "./components/Card/Card";
+import Information from "./components/Information/Information";
+import Highlight from "./components/Highlight/Highlight";
 export const metadata = homeMetadata;
 
 export default function HomePage() {
@@ -31,10 +35,18 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="z-10 mt-4 p-4 text-black">
-        <h1 className="text-2xl font-bold">toto</h1>
+      <div className="z-10 my-16 flex flex-col justify-center p-4 text-black">
+        <Title title="Nos services" paragraph="Plus qu’un simple lavage auto" />
+        <div className="flex w-full flex-row justify-center gap-8">
+          <Card />
+        </div>
       </div>
-
+      <div className="my-44">
+        <Information />
+      </div>
+      <div className="my-44">
+        <Highlight />
+      </div>
       <h1 className="z-10 text-black">Febryer en cours de construction...</h1>
     </main>
   );
