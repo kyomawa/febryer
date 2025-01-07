@@ -1,5 +1,5 @@
 export interface CallToActionProps {
-  size?: "sm" | "md" | "lg";
+  size: "sm" | "md" | "lg";
   isGray?: boolean;
 }
 export default function CallToAction(props: CallToActionProps) {

@@ -6,6 +6,7 @@ import Title from "./components/Title/Title";
 import Card from "./components/Card/Card";
 import Information from "./components/Information/Information";
 import Highlight from "./components/Highlight/Highlight";
+import Testimonial from "./components/Testimonial/Testimonial";
 export const metadata = homeMetadata;
 
 export default function HomePage() {
@@ -46,6 +47,32 @@ export default function HomePage() {
       </div>
       <div className="my-44">
         <Highlight />
+      </div>
+      <div className="mb-32 p-4">
+        <Title
+          title="Ce que nos clients disent de nous"
+          paragraph="Des témoignages qui reflètent la qualité de nos services"
+        />
+        <div className="mx-16 flex flex-row justify-center gap-8">
+          <Testimonial />
+        </div>
+      </div>
+
+      <div className="my-16 flex justify-center">
+        <div>
+          <Title
+            title="Prêt à redonner à votre voiture tout son éclat ?"
+            paragraph="Ne perdez plus de temps"
+          />
+          <p>
+            faites confiance à Febryer pour un entretien professionnel et
+            personnalisé. Cliquez ci-dessous pour réserver votre créneau dès
+            aujourd'hui !
+          </p>
+          <div>
+            <CallToAction size="lg" />
+          </div>
+        </div>
       </div>
       <h1 className="z-10 text-black">Febryer en cours de construction...</h1>
     </main>
