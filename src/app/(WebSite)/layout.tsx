@@ -28,9 +28,9 @@ export default function WebsiteLayout({
           {/* Content of the website */}
           <SmoothScroll>
             <div className="flex min-h-screen flex-col gap-y-8">
-              <Header />
+              {/* <Header /> */}
               <div className="flex-1">{children}</div>
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </SmoothScroll>
           {/* JSON-LD of the website */}

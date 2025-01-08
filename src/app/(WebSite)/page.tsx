@@ -1,11 +1,12 @@
+import Building from "@/components/Building";
 import { homeMetadata } from "@/constants/metadatas";
-
+import Image from "next/image";
 export const metadata = homeMetadata;
 
 export default function HomePage() {
   return (
     <main>
-      <h1>Febryer en cours de construction...</h1>
+      <Building />
     </main>
   );
 }
