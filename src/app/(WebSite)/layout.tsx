@@ -5,8 +5,6 @@ import "../globals.css";
 import NextTopLoader from "nextjs-toploader";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ViewTransitions } from "next-view-transitions";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 
 export const metadata: Metadata = commonMetadata;
 
