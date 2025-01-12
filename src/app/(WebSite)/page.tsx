@@ -7,6 +7,7 @@ import Card from "./components/Card/Card";
 import Information from "./components/Information/Information";
 import Highlight from "./components/Highlight/Highlight";
 import Testimonial from "./components/Testimonial/Testimonial";
+
 export const metadata = homeMetadata;
 
 export default function HomePage() {
@@ -21,15 +22,15 @@ export default function HomePage() {
             layout="fill"
             priority
           />
-          <div className="relative z-10 my-0 p-4 uppercase text-white transition-all duration-700 sm:my-12 md:my-16 lg:my-20 xl:my-24">
-            <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
+          <div className="relative z-10 mx-auto my-0 p-4 uppercase text-white transition-all duration-700 sm:my-12 md:my-16 lg:my-20 xl:my-24">
+            <h1 className="text-3xl font-bold drop-shadow-2xl sm:text-4xl md:text-5xl">
               <span className="text-primary-500">Toujours</span> brillant
             </h1>
-            <h2 className="mt-4 text-2xl font-bold sm:text-3xl md:text-4xl">
+            <h2 className="text-2xl font-bold drop-shadow-2xl sm:text-3xl md:text-4xl">
               <span className="text-primary-500">Toujours</span> prêt à rouler
             </h2>
-            <div className="mt-4">
-              <CallToAction size="lg" />
+            <div className="mt-1">
+              <CallToAction size="md" />
             </div>
           </div>
           <Banner />
@@ -38,7 +39,7 @@ export default function HomePage() {
 
       <div className="z-10 my-16 flex flex-col justify-center p-4 text-black">
         <Title title="Nos services" paragraph="Plus qu’un simple lavage auto" />
-        <div className="flex w-full flex-row justify-center gap-8">
+        <div className="flex w-full flex-col justify-center gap-8 sm:flex-row">
           <Card />
         </div>
       </div>
@@ -49,16 +50,18 @@ export default function HomePage() {
         <Highlight />
       </div>
       <div className="mb-32 p-4">
-        <Title
-          title="Ce que nos clients disent de nous"
-          paragraph="Des témoignages qui reflètent la qualité de nos services"
-        />
-        <div className="mx-16 flex flex-row justify-center gap-8">
+        <div className="mx-16">
+          <Title
+            title="Ce que nos clients disent de nous"
+            paragraph="Des témoignages qui reflètent la qualité de nos services"
+          />
+        </div>
+        <div className="mx-16 flex flex-col justify-center gap-8 lg:flex-row">
           <Testimonial />
         </div>
       </div>
 
-      <div className="my-16 flex justify-center">
+      <div className="mx-4 my-16 flex justify-center md:mx-auto">
         <div>
           <Title
             title="Prêt à redonner à votre voiture tout son éclat ?"
@@ -70,11 +73,10 @@ export default function HomePage() {
             aujourd'hui !
           </p>
           <div>
-            <CallToAction size="lg" />
+            <CallToAction size="md" />
           </div>
         </div>
       </div>
-      <h1 className="z-10 text-black">Febryer en cours de construction...</h1>
     </main>
   );
 }

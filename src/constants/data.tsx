@@ -1,6 +1,5 @@
-import { CalendarCheck, Handshake, Settings } from "lucide-react";
+import { Sparkles, CalendarCheck, Handshake, Settings } from "lucide-react";
 import { NavbarLinkProps, SidebarLinkProps } from "./types";
-import { de } from "date-fns/locale";
 
 // WebApp =============================================================================================================================================
 
@@ -12,6 +11,7 @@ export const navbarLinks: NavbarLinkProps[] = [
   { path: "/", label: "Accueil" },
   { path: "/reservations", label: "Réserver" },
   { path: "/contact", label: "Contact" },
+  { path: "/temoignages", label: "Témoignages" },
 ];
 
 // =============================================================================================================================================
@@ -33,6 +33,11 @@ export const sidebarLinks: SidebarLinkProps[] = [
     path: `${webAppUrl}reservations`,
     label: "Réservations",
     icon: <CalendarCheck />,
+  },
+  {
+    path: `${webAppUrl}temoignages`,
+    label: "Témoignages",
+    icon: <Sparkles />,
   },
   { path: `${webAppUrl}parametres`, label: "Paramètres", icon: <Settings /> },
 ];
