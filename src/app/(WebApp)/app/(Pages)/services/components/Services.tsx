@@ -45,7 +45,7 @@ export default function Services() {
             services.map((service) => (
               <div
                 key={service.id}
-                className="rounded-lg border border-gray-300 p-4 shadow-sm"
+                className="rounded-lg border border-gray-300 p-4 shadow-lg transition-all duration-200 hover:bg-primary-100 hover:shadow-xl"
               >
                 <h3 className="text-lg font-bold">{service.name}</h3>
                 <p>Prix : {service.price}€</p>
