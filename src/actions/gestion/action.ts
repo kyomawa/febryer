@@ -1,5 +1,6 @@
 "use server";
 import prisma from "@/lib/prisma";
+import { BookingStatus } from "@prisma/client";
 
 export const getServices = async () => {
   return await prisma.service.findMany();
@@ -37,6 +38,21 @@ export const getReservations = async () => {
   } catch (error) {
     console.error("Erreur lors de la récupération des réservations :", error);
     throw new Error("Impossible de récupérer les réservations");
+  }
+};
+
+export const updateReservationStatus = async (
+  id: string,
+  status: BookingStatus,
+) => {
+  try {
+    await prisma.booking.update({
+      where: { id },
+      data: { status },
+    });
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de la réservation :", error);
+    throw new Error("Impossible de mettre à jour la réservation");
   }
 };
 

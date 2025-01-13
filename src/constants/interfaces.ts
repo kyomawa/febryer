@@ -10,5 +10,5 @@ export interface FilterAndSortControlsProps {
     }>
   >;
   sortOrder: string;
-  setSortOrder: React.Dispatch<React.SetStateAction<string>>;
+  setSortOrder: React.Dispatch<React.SetStateAction<"asc" | "desc">>;
 }

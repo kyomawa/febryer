@@ -37,7 +37,7 @@ const FilterAndSortControls: React.FC<FilterAndSortControlsProps> = ({
       <select
         className="rounded border border-gray-300 p-2"
         value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value)}
+        onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
       >
         <option value="asc">Ordre croissant</option>
         <option value="desc">Ordre décroissant</option>
