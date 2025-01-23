@@ -70,7 +70,7 @@ export default function HomePage() {
           <p>
             faites confiance à Febryer pour un entretien professionnel et
             personnalisé. Cliquez ci-dessous pour réserver votre créneau dès
-            aujourd'hui !
+            aujourd&apos;hui !
           </p>
           <div>
             <CallToAction size="md" />

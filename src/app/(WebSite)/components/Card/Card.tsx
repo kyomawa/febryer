@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 const items = [
   { image: "image1.jpg", title: "Title 1", description: "Description 1" },
@@ -10,7 +9,7 @@ export default function Card() {
   return items.map((item) => (
     <div key={item.title} className="w-full">
       <div className="h-80 rounded-lg bg-white p-4 shadow-lg">
-        <Image src={item.image} alt={item.title} />
+        <img src={item.image} alt={item.title} />
       </div>
       <h3 className="text-md font-bold">{item.title}</h3>
     </div>

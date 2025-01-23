@@ -7,7 +7,7 @@ export default function Footer() {
           <div>
             Spécialiste du nettoyage intérieur et extérieur, Febryer vous offre
             un service professionnel, personnalisé et respectueux de
-            l'environnement. Votre satisfaction est notre priorité !
+            l&apos;environnement. Votre satisfaction est notre priorité !
           </div>
         </div>
 
@@ -16,7 +16,7 @@ export default function Footer() {
           <div>
             Spécialiste du nettoyage intérieur et extérieur, Febryer vous offre
             un service professionnel, personnalisé et respectueux de
-            l'environnement. Votre satisfaction est notre priorité !
+            l&apos;environnement. Votre satisfaction est notre priorité !
           </div>
         </div>
         <div className="flex flex-col">
@@ -24,7 +24,7 @@ export default function Footer() {
           <div>
             Spécialiste du nettoyage intérieur et extérieur, Febryer vous offre
             un service professionnel, personnalisé et respectueux de
-            l'environnement. Votre satisfaction est notre priorité !
+            l&apos;environnement. Votre satisfaction est notre priorité !
           </div>
         </div>
       </div>

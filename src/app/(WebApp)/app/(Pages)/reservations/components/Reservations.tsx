@@ -4,11 +4,13 @@ import {
   getReservations,
   updateReservationStatus,
 } from "@/actions/gestion/action";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import ContentHeader from "../../components/ContentHeader";
 import { CircleDashed, CircleDotDashed } from "lucide-react";
 import FilterAndSortControls from "../../components/Filter/page";
 import { ReservationModal } from "./Modal";
+import { Button } from "@/components/ui/button";
+import AddReservationModal from "./AddReservationModal";
 
 type Reservation = {
   id: string;
@@ -16,9 +18,9 @@ type Reservation = {
   startTime: string;
   endTime: string;
   service: {
-    name: string;
-    price: number;
-  };
+    name?: string;
+    price?: number;
+  } | null;
   customer: {
     name: string;
     email: string;
@@ -45,24 +47,62 @@ export default function Reservations() {
   const [selectedReservation, setSelectedReservation] =
     useState<Reservation | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [addReservationModal, setAddReservationModal] =
+    useState<boolean>(false);
 
-  const handleAccept = () => {
-    // Logic to accept the reservation
-    console.log("Reservation accepted");
+  const handleAccept = async () => {
     if (selectedReservation) {
-      updateReservationStatus(selectedReservation.id, "ACCEPTED");
+      const confirm = window.confirm(
+        `Êtes-vous sûr de vouloir accepter la réservation N°${selectedReservation.id} ?`,
+      );
+      if (!confirm) return;
+      try {
+        await updateReservationStatus(selectedReservation.id, "ACCEPTED");
+        // Mettre à jour l'état local des réservations
+        setReservations((prev) =>
+          prev.map((res) =>
+            res.id === selectedReservation.id
+              ? { ...res, status: "ACCEPTED" }
+              : res,
+          ),
+        );
+      } catch (error) {
+        console.error("Erreur lors de l'acceptation :", error);
+        setError("Impossible de mettre à jour la réservation.");
+      } finally {
+        setSelectedReservation(null);
+      }
     }
-    setSelectedReservation(null);
   };
 
-  const handleReject = () => {
-    // Logic to reject the reservation
-    console.log("Reservation rejected");
-    setSelectedReservation(null);
+  const handleReject = async () => {
+    if (selectedReservation) {
+      const confirm = window.confirm(
+        `Êtes-vous sûr de vouloir refuser la réservation N°${selectedReservation.id} ?`,
+      );
+      if (!confirm) return;
+      try {
+        await updateReservationStatus(selectedReservation.id, "REFUSED");
+
+        // Mettre à jour l'état local des réservations
+        setReservations((prev) =>
+          prev.map((res) =>
+            res.id === selectedReservation.id
+              ? { ...res, status: "REFUSED" }
+              : res,
+          ),
+        );
+      } catch (error) {
+        console.error("Erreur lors du refus :", error);
+        setError("Impossible de mettre à jour la réservation.");
+      } finally {
+        setSelectedReservation(null);
+      }
+    }
   };
 
   useEffect(() => {
-    const fetchReservations = async () => {
+    const fetchReservations = async (): Promise<void> => {
       try {
         const data = await getReservations();
         setReservations(
@@ -85,22 +125,25 @@ export default function Reservations() {
     fetchReservations();
   }, []);
 
-  const filteredReservations = reservations
-    .filter((reservation) => {
-      if (filters.status && reservation.status !== filters.status) return false;
-      if (
-        filters.startTime &&
-        new Date(reservation.startTime).toISOString().split("T")[0] !==
-          filters.startTime
-      )
-        return false;
-      return true;
-    })
-    .sort((a, b) => {
-      const dateA = new Date(a.startTime).getTime();
-      const dateB = new Date(b.startTime).getTime();
-      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
-    });
+  const filteredReservations = useMemo(() => {
+    return reservations
+      .filter((reservation) => {
+        if (filters.status && reservation.status !== filters.status)
+          return false;
+        if (
+          filters.startTime &&
+          new Date(reservation.startTime).toISOString().split("T")[0] !==
+            filters.startTime
+        )
+          return false;
+        return true;
+      })
+      .sort((a, b) => {
+        const dateA = new Date(a.startTime).getTime();
+        const dateB = new Date(b.startTime).getTime();
+        return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+      });
+  }, [reservations, filters, sortOrder]);
 
   return (
     <div>
@@ -111,6 +154,7 @@ export default function Reservations() {
         onAccept={handleAccept}
         onReject={handleReject}
       />
+      {addReservationModal ? <AddReservationModal /> : null}
 
       <section className="relative flex min-h-[calc(100vh-7rem)] flex-col gap-y-6">
         <ContentHeader
@@ -123,11 +167,19 @@ export default function Reservations() {
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
         />
-
+        <div>
+          <Button
+            className="btn btn-primary"
+            onClick={() => setAddReservationModal(true)}
+          >
+            {" "}
+            Ajouter une Réservation{" "}
+          </Button>
+        </div>
         <div className="flex flex-col gap-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {loading ? (
-              <p className="text-center text-gray-500">
+              <p className="absolute flex w-full justify-center text-center text-gray-500">
                 Chargement des réservations...
               </p>
             ) : error ? (
@@ -141,7 +193,7 @@ export default function Reservations() {
                 >
                   <h3 className="mb-2 flex flex-row justify-between text-xl font-bold text-gray-800">
                     <div>N° #{reservation.id}</div>
-                    <div>{reservation.service.price}€</div>
+                    <div>{reservation.service?.price ?? "Non défini"}€</div>
                   </h3>
                   <p className="text-md mb-1 flex justify-between text-gray-600">
                     <span className="font-semibold">Client :</span>{" "}
@@ -161,7 +213,7 @@ export default function Reservations() {
                   </p>
                   <p className="mb-1 text-sm text-gray-600">
                     <span className="font-semibold">Service :</span>{" "}
-                    {reservation.service.name}
+                    {reservation.service?.name ?? "Non défini"}
                   </p>
                   <p className="mb-1 text-sm text-gray-600">
                     <span className="font-semibold">Téléphone :</span>{" "}
@@ -190,7 +242,7 @@ export default function Reservations() {
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-500">
+              <p className="absolute flex w-full justify-center text-center text-gray-500">
                 Aucune réservation disponible.
               </p>
             )}
