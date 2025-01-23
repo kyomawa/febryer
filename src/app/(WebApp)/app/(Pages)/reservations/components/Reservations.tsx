@@ -7,7 +7,7 @@ import {
 import React, { useState, useEffect, useMemo } from "react";
 import ContentHeader from "../../components/ContentHeader";
 import { CircleDashed, CircleDotDashed } from "lucide-react";
-import FilterAndSortControls from "../../components/Filter/page";
+import FilterAndSortControls from "../../components/Filter/Filter";
 import { ReservationModal } from "./Modal";
 import { Button } from "@/components/ui/button";
 import AddReservationModal from "./AddReservationModal";
