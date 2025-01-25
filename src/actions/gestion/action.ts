@@ -1,6 +1,7 @@
 "use server";
 import prisma from "@/lib/prisma";
 import { BookingStatus } from "@prisma/client";
+import { bookingSchema } from "./schemas";
 
 export const getServices = async () => {
   return await prisma.service.findMany();
@@ -133,6 +134,43 @@ export async function getBookingsWithServices(filter?: {
     return bookings;
   } catch (error) {
     console.error("Error fetching bookings:", error);
+    throw error;
+  }
+}
+
+export async function createBooking(input: any) {
+  let customerLog;
+  let name = input.firstName + " " + input.lastName;
+  try {
+    customerLog = await prisma.customerLog.create({
+      data: {
+        name: name,
+        email: input.email,
+        phone: input.phone,
+        address: input.address,
+        message: input.message,
+      },
+    });
+  } catch (error) {
+    console.error("Error creating booking:", error);
+    throw error;
+  }
+
+  try {
+    const booking = await prisma.booking.create({
+      data: {
+        customerId: customerLog.id,
+        serviceId: input.serviceId,
+        createdAt: input.createdAt ?? new Date().toISOString(),
+        startTime: new Date(input.startTime).toISOString(),
+        endTime: new Date(input.endTime).toISOString(),
+        status: BookingStatus.PENDING,
+      },
+    });
+
+    return booking;
+  } catch (error) {
+    console.error("Error creating booking:", error);
     throw error;
   }
 }

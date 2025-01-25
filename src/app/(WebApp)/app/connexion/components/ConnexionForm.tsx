@@ -42,7 +42,8 @@ export default function ConnexionForm() {
 
       if (response.success) {
         toast.success(response.message, { id: toastId });
-        router.replace("/app/services");
+        //TODO : Fix Safari redirection
+        router.push("/app/services");
       } else {
         toast.error(response.message, { id: toastId });
       }

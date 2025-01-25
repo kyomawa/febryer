@@ -51,7 +51,7 @@ export const login = async (formData: FormData): Promise<MessageProps> => {
 
   return {
     success: true,
-    message: "Bienvenue dans ton application BG.",
+    message: "Bienvenue sur le panel d'administation.",
   };
 };
 

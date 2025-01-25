@@ -154,7 +154,10 @@ export default function Reservations() {
         onAccept={handleAccept}
         onReject={handleReject}
       />
-      {addReservationModal ? <AddReservationModal /> : null}
+      <AddReservationModal 
+       addReservation={addReservationModal}
+        onClose={() => setAddReservationModal(false)}
+      /> 
 
       <section className="relative flex min-h-[calc(100vh-7rem)] flex-col gap-y-6">
         <ContentHeader

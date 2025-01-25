@@ -35,9 +35,9 @@ model Booking {
   status    BookingStatus @default(PENDING)
   createdAt DateTime      @default(now())
 
-  service    Service?     @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-  serviceId  String?      @db.ObjectId
-  customer   CustomerLog  @relation(fields: [customerId], references: [id])
+  service    Service     @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  serviceId  String      @db.ObjectId
+  customer   CustomerLog  @relation(fields: [customerId], references: [id], onDelete: Cascade)
   customerId String       @db.ObjectId
 }
 
