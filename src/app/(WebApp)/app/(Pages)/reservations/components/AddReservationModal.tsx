@@ -60,8 +60,9 @@ export default function AddReservationModal({
   }, []);
 
   const onSubmit = (data: FormData) => {
-    console.log("Données soumises :", data);
     createBooking(data);
+    onClose();
+    window.location.reload();
   };
 
   return (

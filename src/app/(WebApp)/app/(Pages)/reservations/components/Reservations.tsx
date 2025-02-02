@@ -154,10 +154,10 @@ export default function Reservations() {
         onAccept={handleAccept}
         onReject={handleReject}
       />
-      <AddReservationModal 
-       addReservation={addReservationModal}
+      <AddReservationModal
+        addReservation={addReservationModal}
         onClose={() => setAddReservationModal(false)}
-      /> 
+      />
 
       <section className="relative flex min-h-[calc(100vh-7rem)] flex-col gap-y-6">
         <ContentHeader
@@ -194,13 +194,17 @@ export default function Reservations() {
                   className="rounded-lg border border-gray-300 p-6 shadow-lg transition-all duration-200 hover:cursor-pointer hover:bg-primary-100 hover:shadow-xl"
                   onClick={() => setSelectedReservation(reservation)}
                 >
-                  <h3 className="mb-2 flex flex-row justify-between text-xl font-bold text-gray-800">
-                    <div>N° #{reservation.id}</div>
+                  <h3 className="flex flex-row justify-between text-xl font-bold text-gray-800">
+                    <div>
+                      <span className="font-semibold">Client :</span>{" "}
+                      {reservation.customer.name}
+                    </div>
                     <div>{reservation.service?.price ?? "Non défini"}€</div>
                   </h3>
-                  <p className="text-md mb-1 flex justify-between text-gray-600">
-                    <span className="font-semibold">Client :</span>{" "}
-                    {reservation.customer.name}
+                  <p className="mb-2 flex justify-between text-sm text-gray-500">
+                    <div>
+                      <strong>N° </strong>#{reservation.id}
+                    </div>
                     <span className="flex items-center gap-2">
                       {reservation.status}
                       {reservation.status === "PENDING" && (

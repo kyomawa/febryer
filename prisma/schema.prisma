@@ -49,6 +49,7 @@ model Service {
   price     Float
   duration  String
   createdAt DateTime      @default(now())
+  image     String?
   list      ServiceItem[]
 
   bookings Booking[]

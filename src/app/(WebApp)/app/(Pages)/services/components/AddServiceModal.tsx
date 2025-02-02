@@ -1,10 +1,8 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { createServices } from "@/actions/gestion/action";
-import {
-  createServiceSchema,
-  ServiceFormValues,
-} from "@/actions/gestion/schemas";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,27 +11,61 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { onImageChangeCompress } from "@/lib/utils";
+import { createServices } from "@/actions/gestion/action";
+import {
+  createServiceSchema,
+  ServiceFormValues,
+} from "@/actions/gestion/schemas";
+import Image from "next/image";
 
 interface AddServiceModalProps {
   onClose: () => void;
+  isOpen: boolean;
 }
 
-export function AddServiceModal({
-  onClose,
-  isOpen,
-}: AddServiceModalProps & { isOpen: boolean }) {
+export function AddServiceModal({ onClose, isOpen }: AddServiceModalProps) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ServiceFormValues>({
     resolver: zodResolver(createServiceSchema),
   });
 
+  const [compressedFile, setCompressedFile] = useState<File | null>(null);
+
+  const handleImageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    await onImageChangeCompress(
+      event,
+      (file: unknown) => {
+        setValue("image", file as File); // Mettre à jour le champ "image" du formulaire
+      },
+      setCompressedFile,
+
+      async () => {
+        // Callback optionnel si besoin
+      },
+    );
+  };
+
   const onSubmit = async (data: ServiceFormValues) => {
     try {
-      console.log("Submitting data:", data); // Ajoutez ceci pour vérifier les données envoyées
-      await createServices(data);
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("price", data.price.toString()); // Convertir en chaîne pour FormData
+      formData.append("duration", data.duration);
+      formData.append("description", data.description || "");
+
+      if (compressedFile) {
+        formData.append("image", compressedFile);
+      }
+
+      console.log("Données envoyées :", Object.fromEntries(formData.entries()));
+      await createServices(formData);
       console.log("Data successfully submitted");
       onClose();
       window.location.reload();
@@ -47,9 +79,10 @@ export function AddServiceModal({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Détails de la réservation</DialogTitle>
+          <DialogTitle>Créer un service</DialogTitle>
         </DialogHeader>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          {/* Nom du service */}
           <div className="flex flex-col">
             <label htmlFor="service-name" className="mb-0 text-sm">
               Nom du service
@@ -66,6 +99,8 @@ export function AddServiceModal({
               </span>
             )}
           </div>
+
+          {/* Prix */}
           <div className="flex flex-col">
             <label htmlFor="service-price" className="mb-0 text-sm">
               Prix
@@ -82,6 +117,8 @@ export function AddServiceModal({
               </span>
             )}
           </div>
+
+          {/* Durée */}
           <div className="flex flex-col">
             <label htmlFor="service-duration" className="mb-0 text-sm">
               Durée de la prestation
@@ -98,6 +135,8 @@ export function AddServiceModal({
               </span>
             )}
           </div>
+
+          {/* Description */}
           <div className="flex flex-col">
             <label htmlFor="service-description" className="mb-0 text-sm">
               Description
@@ -113,8 +152,41 @@ export function AddServiceModal({
               </span>
             )}
           </div>
+
+          {/* Image du service */}
+          <div className="flex flex-col">
+            <label htmlFor="service-image" className="mb-0 text-sm">
+              Image du service
+            </label>
+            <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded border">
+              {compressedFile ? (
+                <Image
+                  src={URL.createObjectURL(compressedFile)}
+                  alt="Aperçu de l'image"
+                  className="h-full w-full object-cover"
+                  width={200}
+                  height={200}
+                />
+              ) : (
+                <span className="text-gray-500">Aucune image sélectionnée</span>
+              )}
+              <input
+                id="service-image"
+                type="file"
+                accept="image/*"
+                className="absolute inset-0 cursor-pointer opacity-0"
+                onChange={handleImageChange}
+              />
+            </div>
+            {errors.image && (
+              <span className="text-sm text-red-500">
+                {errors.image.message as string}
+              </span>
+            )}
+          </div>
+
           <DialogFooter>
-            <Button type="submit" variant="default">
+            <Button type="submit" variant="default" disabled={isSubmitting}>
               {isSubmitting ? "Enregistrement..." : "Enregistrer"}
             </Button>
             <Button onClick={onClose} variant="secondary">
