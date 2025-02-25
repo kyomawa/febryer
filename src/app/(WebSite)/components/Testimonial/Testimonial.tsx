@@ -8,7 +8,7 @@ const items = [
 export default function Testimonial() {
   return items.map((item) => (
     <div key={item.title} className="w-full">
-      <div className="h-80 gap-4 rounded-lg bg-white p-4 shadow-lg">
+      <div className="mt-4 h-80 gap-4 rounded-lg bg-white p-4 shadow-lg">
         {/* <img src={item.image} alt={item.title} /> */}
         <h3 className="text-md font-bold">{item.title}</h3>
       </div>

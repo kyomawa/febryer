@@ -5,7 +5,9 @@ export interface TitleProps {
 export default function Title(props: TitleProps) {
   return (
     <div>
-      <p className="text-md font-semibold text-gray-500">{props.paragraph}</p>
+      <div className="text-md font-semibold text-gray-500">
+        {props.paragraph}
+      </div>
       <h1 className="text-4xl font-bold">{props.title}</h1>
     </div>
   );

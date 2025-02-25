@@ -8,10 +8,18 @@ export default function Header() {
         <Image src="img/logo-light.svg" alt="Logo" width={120} height={120} />
         <nav>
           <ul className="flex flex-row space-x-4 text-base font-semibold">
-            <li className="duration-200 hover:text-primary-500">Accueil</li>
-            <li className="duration-200 hover:text-primary-500">Services</li>
-            <li className="duration-200 hover:text-primary-500">A Propos</li>
-            <li className="duration-200 hover:text-primary-500">Contact</li>
+            <li className="cursor-pointer duration-200 hover:text-primary-500">
+              Accueil
+            </li>
+            <li className="cursor-pointer duration-200 hover:text-primary-500">
+              Services
+            </li>
+            <li className="cursor-pointer duration-200 hover:text-primary-500">
+              A Propos
+            </li>
+            <li className="cursor-pointer duration-200 hover:text-primary-500">
+              Contact
+            </li>
           </ul>
         </nav>
         <CallToAction size="md" />

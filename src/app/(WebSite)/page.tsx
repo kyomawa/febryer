@@ -7,6 +7,7 @@ import Card from "./components/Card/Card";
 import Information from "./components/Information/Information";
 import Highlight from "./components/Highlight/Highlight";
 import Testimonial from "./components/Testimonial/Testimonial";
+import { InViewParagraph } from "@/components/ui/InViewParagraph";
 
 export const metadata = homeMetadata;
 
@@ -37,13 +38,13 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="z-10 my-16 flex flex-col justify-center p-4 text-black">
+      <div className="z-10 mx-16 my-16 flex flex-col justify-center p-4 text-black">
         <Title title="Nos services" paragraph="Plus qu’un simple lavage auto" />
         <div className="flex w-full flex-col justify-center gap-8 sm:flex-row">
           <Card />
         </div>
       </div>
-      <div className="my-44">
+      <div className="mx-full my-44">
         <Information />
       </div>
       <div className="my-44">
@@ -60,23 +61,22 @@ export default function HomePage() {
           <Testimonial />
         </div>
       </div>
-
-      <div className="mx-4 my-16 flex justify-center md:mx-auto">
-        <div>
-          <Title
-            title="Prêt à redonner à votre voiture tout son éclat ?"
-            paragraph="Ne perdez plus de temps"
-          />
-          <p>
+      <InViewParagraph>
+        <div className="mx-4 my-16 flex justify-center md:mx-auto">
+          <div>
+            <Title
+              title="Prêt à redonner à votre voiture tout son éclat ?"
+              paragraph="Ne perdez plus de temps"
+            />
             faites confiance à Febryer pour un entretien professionnel et
             personnalisé. Cliquez ci-dessous pour réserver votre créneau dès
             aujourd&apos;hui !
-          </p>
-          <div>
-            <CallToAction size="md" />
+            <div>
+              <CallToAction size="md" />
+            </div>
           </div>
         </div>
-      </div>
+      </InViewParagraph>
     </main>
   );
 }

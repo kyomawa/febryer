@@ -1,4 +1,9 @@
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 type TooltipComponentProps = {
@@ -8,7 +13,12 @@ type TooltipComponentProps = {
   className?: string;
 };
 
-export default function TooltipComponent({ children, label, side, className }: TooltipComponentProps) {
+export default function TooltipComponent({
+  children,
+  label,
+  side,
+  className,
+}: TooltipComponentProps) {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={200}>

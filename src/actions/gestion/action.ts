@@ -7,7 +7,9 @@ import {
   uploadImageToCloudinary,
 } from "../cloudinary/action";
 import { revalidateTag } from "next/cache";
-import { createServiceSchema } from "./schemas";
+import { createServiceSchema, updateServiceSchema } from "./schemas";
+
+//=================================================
 
 export const getServices = async () => {
   return await prisma.service.findMany({
@@ -22,6 +24,8 @@ export const getServices = async () => {
     },
   });
 };
+
+//=================================================
 export const getReservations = async () => {
   try {
     const reservations = await prisma.booking.findMany({
@@ -60,6 +64,7 @@ export const getReservations = async () => {
   }
 };
 
+//=================================================
 export const updateReservationStatus = async (
   id: string,
   status: BookingStatus,
@@ -75,34 +80,50 @@ export const updateReservationStatus = async (
   }
 };
 
-export const updateServices = async (data: {
-  id: string;
-  name: string;
-  price: number;
-  duration: string;
-  description?: string;
-  image?: File;
-}) => {
+//=================================================
+export const updateServices = async (formData: FormData) => {
+  const validateFields = updateServiceSchema.safeParse(
+    Object.fromEntries(formData.entries()),
+  );
+
+  if (!validateFields.success) {
+    throw new Error("Validation des champs échouée", validateFields.error);
+  }
+
+  const { id, name, price, duration, description, image } = validateFields.data;
+
   try {
     let imageUrl: string | null = null;
 
     // Si une nouvelle image est fournie, on l'upload vers Cloudinary
-    if (data.image) {
+    if (image) {
       imageUrl =
-        data.image instanceof File
-          ? ((await uploadImageToCloudinary(data.image)) ?? null)
+        image instanceof File
+          ? ((await uploadImageToCloudinary(image)) ?? null)
           : null;
+
+      const service = await prisma.service.findUnique({
+        where: { id: id },
+      });
+
+      // Supprimer l'ancienne image si elle existe
+      if (service?.image) {
+        const publicId = service.image.split("/").pop()?.split(".")[0];
+        if (publicId) {
+          await deleteImageFromCloudinary(publicId);
+        }
+      }
     }
 
     // Mettre à jour le service avec l'URL de l'image
     await prisma.service.update({
-      where: { id: data.id },
+      where: { id: id },
       data: {
-        name: data.name,
-        price: data.price,
-        duration: data.duration,
-        description: data.description,
-        image: imageUrl, // Mettre à jour l'URL de l'image
+        name: name,
+        price: Number(price),
+        duration: duration,
+        description: description,
+        image: imageUrl,
       },
     });
 
@@ -116,6 +137,7 @@ export const updateServices = async (data: {
   }
 };
 
+//=================================================
 export const createServices = async (
   formData: FormData,
 ): Promise<{ success: boolean; message: string }> => {
@@ -169,20 +191,16 @@ export const createServices = async (
   }
 };
 
+//=================================================
 export const deleteServices = async (id: string) => {
   try {
-    // Récupérer le service pour obtenir l'URL de l'image
     const service = await prisma.service.findUnique({ where: { id } });
-
     if (service?.image) {
-      // Extraire l'ID public de l'URL Cloudinary
       const publicId = service.image.split("/").pop()?.split(".")[0];
       if (publicId) {
         await deleteImageFromCloudinary(publicId);
       }
     }
-
-    // Supprimer le service de la base de données
     await prisma.service.delete({ where: { id } });
 
     return { success: true, message: "Service supprimé avec succès" };
@@ -191,6 +209,9 @@ export const deleteServices = async (id: string) => {
     return { success: false, message: "Impossible de supprimer le service" };
   }
 };
+
+//=================================================
+
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 export async function createBooking(input: any) {
   let customerLog;

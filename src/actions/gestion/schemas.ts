@@ -42,6 +42,26 @@ export const createServiceSchema = z.object({
 export type CreateServiceFormValues = z.infer<typeof createServiceSchema>;
 // ==========================================================================================================
 
+export const updateServiceSchema = z.object({
+  id: z.string().min(1, "L'identifiant du service est requis"),
+  name: z.string().min(1, "Le nom du service est requis"),
+  description: z.string().min(1, "La description du service est requise"),
+  price: z.any(),
+  duration: z.string().min(1, "La durée du service est requise"),
+  image: z
+    .instanceof(File, {
+      message: "Merci de bien vouloir insérer une image !",
+    })
+    .refine((file) => {
+      return !file || file.size <= MAX_UPLOAD_SIZE;
+    }, "Votre image doit faire moins de 10MB")
+    .refine((file) => {
+      return ACCEPTED_FILE_TYPES.includes(file?.type as string);
+    }, "Votre image doit être de type : PNG / JPG / JPEG / WEBP / SVG")
+    .optional(),
+});
+
+// ==========================================================================================================
 export const bookingSchema = z.object({
   name: z.string().min(1, "Le nom est requis."),
   email: z.string().email("L'email doit être valide."),
