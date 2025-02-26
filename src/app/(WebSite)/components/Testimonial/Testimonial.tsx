@@ -5,6 +5,9 @@ const items = [
   { image: "image3.jpg", title: "Title 3", description: "Description 3" },
 ];
 
+const api =
+  "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=fe_bryer&inputtype=textquery&fields=place_id&key=YOUR_API_KEY";
+
 export default function Testimonial() {
   return items.map((item) => (
     <div key={item.title} className="w-full">

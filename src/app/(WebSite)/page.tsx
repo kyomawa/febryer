@@ -71,7 +71,7 @@ export default function HomePage() {
             faites confiance à Febryer pour un entretien professionnel et
             personnalisé. Cliquez ci-dessous pour réserver votre créneau dès
             aujourd&apos;hui !
-            <div>
+            <div className="mt-4">
               <CallToAction size="md" />
             </div>
           </div>

@@ -1,4 +1,10 @@
-import { Sparkles, CalendarCheck, Handshake, Settings } from "lucide-react";
+import {
+  Sparkles,
+  CalendarCheck,
+  Handshake,
+  Settings,
+  FolderKanban,
+} from "lucide-react";
 import { NavbarLinkProps, SidebarLinkProps } from "./types";
 
 // WebApp =============================================================================================================================================
@@ -28,6 +34,7 @@ export const ACCEPTED_FILE_TYPES = [
 // =============================================================================================================================================
 
 export const sidebarLinks: SidebarLinkProps[] = [
+  { path: `${webAppUrl}general`, label: "Général", icon: <FolderKanban /> },
   { path: `${webAppUrl}services`, label: "Services", icon: <Handshake /> },
   {
     path: `${webAppUrl}reservations`,

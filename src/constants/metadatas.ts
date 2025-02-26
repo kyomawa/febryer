@@ -147,6 +147,12 @@ export const servicesMetadata: Metadata = {
 };
 
 // ==========================================================================================================
+export const generalMetadata: Metadata = {
+  title: "Général",
+  description: "Modifier les paramètres généraux de l'application.",
+  keywords: "Febryer Application, paramètres généraux, espace utilisateur",
+};
+// ==========================================================================================================
 
 export const reservationsMetadata: Metadata = {
   title: "Réservations",
