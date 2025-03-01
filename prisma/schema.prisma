@@ -66,6 +66,7 @@ model ServiceItem {
 model Theme {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   color     String?
+  secondaryColor String?
   image     String?
   createdAt DateTime @default(now())
 }

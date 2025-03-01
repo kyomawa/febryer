@@ -4,7 +4,6 @@ import { Highlights } from "@/constants/data";
 import CallToAction from "../CallToAction/CallToAction";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { useInView } from "framer-motion";
 import { InViewParagraph } from "@/components/ui/InViewParagraph";
 
 export default function Highlight() {
@@ -17,7 +16,7 @@ export default function Highlight() {
   const translateX = useTransform(scrollYProgress, [0, 1], [500, -300]);
 
   return (
-    <div ref={ref} className="flex flex-col bg-primary-500 text-white">
+    <div ref={ref} className="bg-primary flex flex-col text-white">
       {/* Section du titre principal avec effet de scroll */}
       <section className="flex justify-center overflow-hidden text-nowrap border-b border-white px-4 py-24">
         <motion.h1

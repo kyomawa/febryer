@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-500 pt-8 text-justify text-white">
+    <footer className="bg-primary pt-8 text-justify text-white">
       <div className="flex flex-col justify-between gap-8 px-8 md:flex-row">
         <div className="flex flex-col border-r-2 border-white pr-8">
           <Image
@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="my-auto mt-4 flex items-center justify-center bg-primary-700 py-2">
+      <div className="bg-secondary my-auto mt-4 flex items-center justify-center py-2">
         Made with ❤️ by{" "}
         <a
           href="https://www.kanzoto.com"

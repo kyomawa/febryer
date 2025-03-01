@@ -25,10 +25,10 @@ export default function HomePage() {
           />
           <div className="relative z-10 mx-auto my-0 p-4 uppercase text-white transition-all duration-700 sm:my-12 md:my-16 lg:my-20 xl:my-24">
             <h1 className="text-3xl font-bold drop-shadow-2xl sm:text-4xl md:text-5xl">
-              <span className="text-primary-500">Toujours</span> brillant
+              <span className="text-primary">Toujours</span> brillant
             </h1>
             <h2 className="text-2xl font-bold drop-shadow-2xl sm:text-3xl md:text-4xl">
-              <span className="text-primary-500">Toujours</span> prêt à rouler
+              <span className="text-primary">Toujours</span> prêt à rouler
             </h2>
             <div className="mt-1">
               <CallToAction size="md" />

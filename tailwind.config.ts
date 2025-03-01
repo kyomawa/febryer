@@ -17,6 +17,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: {
+          DEFAULT: "var(--color-primary)",
           "50": "#f2f5fb",
           "100": "#e7eef8",
           "200": "#d4def1",
@@ -30,6 +31,9 @@ const config: Config = {
           "950": "#262840",
           "1000": "#151624",
           "1050": "#0A0B12",
+        },
+        secondary: {
+          DEFAULT: "var(--color-secondary)",
         },
       },
       screens: {

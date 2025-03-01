@@ -5,7 +5,14 @@ export default function General() {
   return (
     <div>
       <ContentHeader title="Général" refreshTagNameButton="Général" />
-      <ColorPicker />
+      <div className="flex flex-row gap-4">
+        <div>
+          <ColorPicker type="primary" />
+        </div>
+        <div>
+          <ColorPicker type="secondary" />
+        </div>
+      </div>
     </div>
   );
 }

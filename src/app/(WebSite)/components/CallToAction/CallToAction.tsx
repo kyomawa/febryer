@@ -4,7 +4,7 @@ export interface CallToActionProps {
 }
 export default function CallToAction(props: CallToActionProps) {
   let sizeClass = "";
-  let color = "bg-primary-500";
+  let color = "bg-primary";
 
   if (props.size === "lg") {
     sizeClass = "p-3 text-lg";
@@ -15,7 +15,9 @@ export default function CallToAction(props: CallToActionProps) {
   }
 
   if (props.isGray) {
-    color = "bg-gray-800";
+    color = "bg-secondary";
   }
-  return <button className={`${color} ${sizeClass}`}>Rendez-vous</button>;
+  return (
+    <button className={`${color} ${sizeClass} text-white`}>Rendez-vous</button>
+  );
 }

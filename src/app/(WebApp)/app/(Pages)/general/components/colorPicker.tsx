@@ -1,17 +1,55 @@
 "use client";
-import { changeColor } from "@/actions/gestion/action";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import {
+  changeColor,
+  changeSecondaryColor,
+  getColor,
+  getSecondaryColor,
+} from "@/actions/gestion/action";
+import React, { useState, useEffect } from "react";
 
-const ColorPicker = ({ default_value = "#1C9488" }) => {
-  const [color, setColor] = useState(() => {
-    const sanitizedHex = sanitizeHex(default_value);
-    const hsl = hexToHsl({ hex: sanitizedHex });
-    return { ...hsl, hex: sanitizedHex };
-  });
+interface ColorPickerProps {
+  type: "primary" | "secondary";
+  default_value?: string;
+}
+
+const ColorPicker: React.FC<ColorPickerProps> = ({
+  default_value,
+  ...colorPickerProps
+}) => {
+  const [color, setColor] = useState<{
+    h: number;
+    s: number;
+    l: number;
+    hex: string;
+  } | null>(null);
+  const [initialColor, setInitialColor] = useState<string | null>(null);
+
+  // Charger la couleur initiale
+  useEffect(() => {
+    const fetchColor = async () => {
+      const resolvedValue =
+        default_value ||
+        (colorPickerProps.type === "primary"
+          ? await getColor()
+          : await getSecondaryColor());
+      const sanitizedHex = sanitizeHex(resolvedValue);
+      const hsl = hexToHsl({ hex: sanitizedHex });
+
+      if (sanitizedHex !== initialColor) {
+        setColor({ ...hsl, hex: sanitizedHex });
+        setInitialColor(sanitizedHex);
+      }
+    };
+    fetchColor();
+  }, [default_value, colorPickerProps.type, initialColor]); // Correction de la dépendance useEffect
 
   const handleSave = async () => {
     try {
-      await changeColor({ color: color.hex });
+      if (colorPickerProps.type === "primary") {
+        await changeColor({ color: color?.hex });
+      } else {
+        await changeSecondaryColor({ color: color?.hex });
+      }
       alert("Couleur enregistrée avec succès !");
     } catch (error) {
       console.error("Erreur lors de l'enregistrement :", error);
@@ -21,9 +59,14 @@ const ColorPicker = ({ default_value = "#1C9488" }) => {
 
   return (
     <div className="flex flex-col items-center gap-3 rounded-lg border bg-white p-4 shadow-md dark:bg-zinc-900">
+      <p>
+        {colorPickerProps.type === "primary"
+          ? "Choisissez une couleur primaire"
+          : "Choisissez une couleur secondaire"}
+      </p>
       <input
         type="color"
-        value={`#${color.hex}`}
+        value={`#${color?.hex ?? "000000"}`} // Valeur par défaut pour éviter une erreur
         onChange={(e) => {
           const hex = sanitizeHex(e.target.value);
           setColor({ ...hexToHsl({ hex }), hex });
@@ -32,7 +75,7 @@ const ColorPicker = ({ default_value = "#1C9488" }) => {
       />
       <input
         type="text"
-        value={color.hex}
+        value={color?.hex ?? ""}
         onChange={(e) => {
           const hex = sanitizeHex(e.target.value);
           if (hex.length <= 6) {
@@ -51,10 +94,12 @@ const ColorPicker = ({ default_value = "#1C9488" }) => {
   );
 };
 
+// Fonction pour nettoyer un code hexadécimal
 function sanitizeHex(val: string) {
   return val.replace(/[^a-fA-F0-9]/g, "").toUpperCase();
 }
 
+// Fonction de conversion HEX -> HSL
 function hexToHsl({ hex }: { hex: string }) {
   hex = hex.replace(/^#/, "");
   if (hex.length === 3) {
@@ -66,18 +111,19 @@ function hexToHsl({ hex }: { hex: string }) {
   while (hex.length < 6) {
     hex += "0";
   }
-  let r = parseInt(hex.slice(0, 2), 16) / 255;
-  let g = parseInt(hex.slice(2, 4), 16) / 255;
-  let b = parseInt(hex.slice(4, 6), 16) / 255;
-  let max = Math.max(r, g, b),
-    min = Math.min(r, g, b);
+  const r = parseInt(hex.slice(0, 2), 16) / 255;
+  const g = parseInt(hex.slice(2, 4), 16) / 255;
+  const b = parseInt(hex.slice(4, 6), 16) / 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  /* eslint-disable prefer-const */
   let h = 0,
     s,
     l = (max + min) / 2;
   if (max === min) {
     h = s = 0;
   } else {
-    let d = max - min;
+    const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
       case r:

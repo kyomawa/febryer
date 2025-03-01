@@ -1,7 +1,7 @@
 import { MapPin, Phone } from "lucide-react";
 export default function Banner() {
   return (
-    <div className="absolute bottom-0 left-0 w-full bg-primary-500 p-4 text-white">
+    <div className="bg-primary absolute bottom-0 left-0 w-full p-4 text-white">
       <div className="mt-2 flex flex-col gap-4 divide-x-0 divide-y sm:flex-row sm:divide-x sm:divide-y-0">
         <div>
           <p>Contactez-nous maintenant</p>

@@ -7,6 +7,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { ViewTransitions } from "next-view-transitions";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = commonMetadata;
 
@@ -28,9 +29,11 @@ export default function WebsiteLayout({
           {/* Content of the website */}
           <SmoothScroll>
             <div className="flex min-h-screen flex-col gap-y-8">
-              <Header />
-              <div className="flex-1">{children}</div>
-              <Footer />
+              <ThemeProvider>
+                <Header />
+                <div className="flex-1">{children}</div>
+                <Footer />
+              </ThemeProvider>
             </div>
           </SmoothScroll>
           {/* JSON-LD of the website */}

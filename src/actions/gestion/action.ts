@@ -250,21 +250,6 @@ export async function createBooking(input: any) {
   }
 }
 
-export async function createColor(input: any) {
-  try {
-    const color = await prisma.theme.create({
-      data: {
-        color: input.color,
-      },
-    });
-
-    return color;
-  } catch (error) {
-    console.error("Error creating color:", error);
-    throw error;
-  }
-}
-
 export async function changeColor(input: any) {
   try {
     const color = await prisma.theme.update({
@@ -281,12 +266,44 @@ export async function changeColor(input: any) {
   }
 }
 
+export async function changeSecondaryColor(input: any) {
+  try {
+    const secondaryColor = await prisma.theme.update({
+      where: { id: "67bfaf0d99d221019ffd28f7" },
+      data: {
+        secondaryColor: input.color,
+      },
+    });
+
+    return secondaryColor;
+  } catch (error) {
+    console.error("Error creating color:", error);
+    throw error;
+  }
+}
+
 export async function getColor() {
   try {
     const theme = await prisma.theme.findMany();
-    return theme;
+    if (theme.length > 0 && theme[0].color) {
+      return "#" + theme[0].color;
+    }
+    return "#000000"; // Valeur par défaut en cas d'erreur
   } catch (error) {
     console.error("Error getting colors:", error);
+    throw error;
+  }
+}
+
+export async function getSecondaryColor() {
+  try {
+    const theme = await prisma.theme.findMany();
+    if (theme.length > 0 && theme[0].secondaryColor) {
+      return "#" + theme[0].secondaryColor;
+    }
+    return "#000000"; // Valeur par défaut en cas d'erreur
+  } catch (error) {
+    console.error("Error getting secondary color:", error);
     throw error;
   }
 }
