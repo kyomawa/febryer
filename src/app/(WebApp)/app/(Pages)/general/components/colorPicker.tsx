@@ -1,4 +1,5 @@
 "use client";
+import { changeColor } from "@/actions/gestion/action";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const ColorPicker = ({ default_value = "#1C9488" }) => {
@@ -10,16 +11,7 @@ const ColorPicker = ({ default_value = "#1C9488" }) => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch("/api/save-color", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ color: color.hex }),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to save color");
-      }
+      await changeColor({ color: color.hex });
       alert("Couleur enregistrée avec succès !");
     } catch (error) {
       console.error("Erreur lors de l'enregistrement :", error);

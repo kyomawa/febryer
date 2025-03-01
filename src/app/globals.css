@@ -7,7 +7,7 @@
     @apply focus-visible:outline-none focus-visible:outline-offset-0;
   }
   html {
-    @apply 3k:text-[18.25px] 4.5k:text-[24.5px] 5k:text-[32px] 6k:text-[40px] 2k:text-[16.25px] 4k:text-[21px] 8k:text-[48px] 10k:text-[64px] 12k:text-[80px];
+    @apply 2k:text-[16.25px] 3k:text-[18.25px] 4k:text-[21px] 4.5k:text-[24.5px] 5k:text-[32px] 6k:text-[40px] 8k:text-[48px] 10k:text-[64px] 12k:text-[80px];
   }
 
   body {

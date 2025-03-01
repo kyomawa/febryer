@@ -250,6 +250,46 @@ export async function createBooking(input: any) {
   }
 }
 
+export async function createColor(input: any) {
+  try {
+    const color = await prisma.theme.create({
+      data: {
+        color: input.color,
+      },
+    });
+
+    return color;
+  } catch (error) {
+    console.error("Error creating color:", error);
+    throw error;
+  }
+}
+
+export async function changeColor(input: any) {
+  try {
+    const color = await prisma.theme.update({
+      where: { id: "67bfaf0d99d221019ffd28f7" },
+      data: {
+        color: input.color,
+      },
+    });
+
+    return color;
+  } catch (error) {
+    console.error("Error creating color:", error);
+    throw error;
+  }
+}
+
+export async function getColor() {
+  try {
+    const theme = await prisma.theme.findMany();
+    return theme;
+  } catch (error) {
+    console.error("Error getting colors:", error);
+    throw error;
+  }
+}
 // A Voir si on peut pas directement chopper ça depuis une api tripadvisor ou google
 // export const getTestimonial = async () => {
 //   return await prisma.service.findMany();
