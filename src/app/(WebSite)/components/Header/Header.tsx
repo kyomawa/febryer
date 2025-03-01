@@ -33,16 +33,16 @@ export default function Header() {
         <Image src="/img/logo-light.svg" alt="Logo" width={120} height={120} />
         <nav>
           <ul className="flex flex-row space-x-4 text-base font-semibold">
-            <li className="hover:text-primary cursor-pointer duration-200">
+            <li className="cursor-pointer duration-200 hover:text-primary">
               Accueil
             </li>
-            <li className="hover:text-primary cursor-pointer duration-200">
+            <li className="cursor-pointer duration-200 hover:text-primary">
               Services
             </li>
-            <li className="hover:text-primary cursor-pointer duration-200">
+            <li className="cursor-pointer duration-200 hover:text-primary">
               A Propos
             </li>
-            <li className="hover:text-primary cursor-pointer duration-200">
+            <li className="cursor-pointer duration-200 hover:text-primary">
               Contact
             </li>
           </ul>

@@ -11,7 +11,7 @@
   }
 
   body {
-    @apply selection:bg-primary-600 dark:selection:bg-primary-800 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary-600 dark:[&::-webkit-scrollbar-thumb]:bg-primary-700 [&::-webkit-scrollbar]:w-1.5;
+    @apply selection:bg-primary-600 dark:selection:bg-primary-800 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-secondary dark:[&::-webkit-scrollbar-thumb]:bg-secondary [&::-webkit-scrollbar]:w-1.5;
   }
 }
 

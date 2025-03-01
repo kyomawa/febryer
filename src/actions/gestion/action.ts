@@ -307,6 +307,40 @@ export async function getSecondaryColor() {
     throw error;
   }
 }
+
+export async function fetchReviews() {
+  const featurableWidgetId = process.env.FEATURABLE_API_KEY;
+
+  if (!featurableWidgetId) {
+    throw new Error("Missing API Key");
+  }
+
+  try {
+    const response = await fetch(
+      `https://featurable.com/api/v1/widgets/${featurableWidgetId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${featurableWidgetId}`,
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch reviews: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.reviews;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Error fetching reviews:", error.message);
+    } else {
+      console.error("Error fetching reviews:", error);
+    }
+    return [];
+  }
+}
+
 // A Voir si on peut pas directement chopper ça depuis une api tripadvisor ou google
 // export const getTestimonial = async () => {
 //   return await prisma.service.findMany();

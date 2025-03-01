@@ -18,6 +18,10 @@ export default function CallToAction(props: CallToActionProps) {
     color = "bg-secondary";
   }
   return (
-    <button className={`${color} ${sizeClass} text-white`}>Rendez-vous</button>
+    <button
+      className={`${color} ${sizeClass} text-white duration-150 hover:brightness-75`}
+    >
+      Rendez-vous
+    </button>
   );
 }
