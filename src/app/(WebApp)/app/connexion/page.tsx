@@ -24,7 +24,7 @@ export default function page() {
           <ConnexionForm />
           <div className="flex justify-center border-t border-neutral-200 py-4 dark:border-white/15">
             <p className="font-roboto text-sm text-neutral-400 dark:text-primary-200/65">
-              © 2024 Febryer. Tous droits réservés.
+              © 2024 Fé bryer. Tous droits réservés.
             </p>
           </div>
         </div>
