@@ -16,7 +16,7 @@ export function Gallery({ photos }: GalleryProps) {
           </div>
           <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
             {photos.map((photo) => (
-              <img key={photo.id} src={photo.url} alt={photo.altText || `Détail véhicule ${photo.id}`} className="h-44 w-full object-cover rounded-2xl ring-1 ring-neutral-100 dark:ring-neutral-800"/>
+              <img key={photo.id} src={photo.url} alt={photo.alt || `Détail véhicule ${photo.id}`} className="h-44 w-full object-cover rounded-2xl ring-1 ring-neutral-100 dark:ring-neutral-800"/>
             ))}
           </div>
         </div>

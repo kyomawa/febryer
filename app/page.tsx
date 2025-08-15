@@ -69,7 +69,7 @@ export default async function FeBryerLanding() {
             </div>
             <div className="relative">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-2xl ring-1 ring-neutral-100 dark:ring-neutral-800">
-                {heroPhoto && <img src={heroPhoto.url} alt={heroPhoto.altText || 'Hero image'} className="h-full w-full object-cover"/>}
+                {heroPhoto && <img src={heroPhoto.url} alt={heroPhoto.alt || 'Hero image'} className="h-full w-full object-cover"/>}
               </div>
               <div className="absolute -bottom-6 -left-6 rounded-2xl bg-white dark:bg-neutral-800 shadow-lg ring-1 ring-neutral-100 dark:ring-neutral-700 p-4 flex items-center gap-3">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-red-500 text-white font-bold">FB</span>

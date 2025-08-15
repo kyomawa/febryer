@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     const photo = await prisma.photo.create({
       data: {
         url: `/uploads/${uploadedFile.newFilename}`,
-        altText: fields.altText?.[0] || 'Uploaded photo',
+        alt: fields.alt?.[0] || 'Uploaded photo',
         context: fields.context?.[0] || 'gallery',
       },
     });

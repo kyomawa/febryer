@@ -52,7 +52,8 @@ export async function POST(req: Request) {
   const newPhoto = await prisma.photo.create({
     data: {
       url: `/uploads/${file.name}`,
-      altText: altText,
+      alt: altText,
+      context: 'gallery', // Par défaut
     },
   });
 

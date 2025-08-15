@@ -75,11 +75,22 @@ model Appointment {
   amountTotal Int
   when        String?
   note        String?
+  message     String?
+  addressLine String?
+  postcode    String?
+  city        String?
   status      String    @default("pending")
   
   stripePaymentIntentId String? @unique
   stripeStatus          String?
+  stripeSessionId       String?
+  paymentStatus         String?
+  currency              String?
   items        Json?
+  
+  capturedAt   DateTime?
+  canceledAt   DateTime?
+  authorizedAt DateTime?
   
   date      DateTime @default(now())
   createdAt DateTime @default(now())
@@ -97,6 +108,8 @@ model Service {
   name      String  @unique
   price     Int
   group     String
+  order     Int?    @default(0)
+  active    Boolean @default(true)
   items     PackItem[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -106,6 +119,7 @@ model Size {
   id     String @id @map("_id")
   label  String
   mult   Float
+  order  Int?   @default(0)
 }
 
 model Pack {

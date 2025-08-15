@@ -138,6 +138,37 @@ async function main() {
     },
   })
 
+  // Photos par défaut
+  console.log('Creating photos...')
+  // Photo héro
+  await prisma.photo.create({
+    data: {
+      url: '/uploads/hero-1754923758328.jpeg',
+      context: 'hero',
+      alt: 'Image héro par défaut',
+      featured: true,
+    },
+  })
+
+  // Photos galerie
+  const galleryPhotos = [
+    { filename: 'gallery-1754923773929.webp', alt: 'Photo de galerie 1' },
+    { filename: 'gallery-1754923777917.jpg', alt: 'Photo de galerie 2' },
+    { filename: 'gallery-1754923786539.webp', alt: 'Photo de galerie 3' },
+    { filename: 'gallery-1754923791334.jpeg', alt: 'Photo de galerie 4' },
+  ]
+
+  for (const photo of galleryPhotos) {
+    await prisma.photo.create({
+      data: {
+        url: `/uploads/${photo.filename}`,
+        context: 'gallery',
+        alt: photo.alt,
+        featured: false,
+      },
+    })
+  }
+
   console.log('✅ Seeding completed!')
 }
 

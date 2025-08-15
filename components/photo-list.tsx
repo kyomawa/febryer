@@ -40,7 +40,7 @@ export function PhotoList({ initialPhotos }: PhotoListProps) {
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {photos.map((photo) => (
           <div key={photo.id} className="relative group">
-            <img src={photo.url} alt={photo.altText || ''} className="w-full h-32 object-cover rounded-lg" />
+            <img src={photo.url} alt={photo.alt || ''} className="w-full h-32 object-cover rounded-lg" />
             <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 truncate">{photo.context}</div>
             <button 
               onClick={() => handleDelete(photo.id)}
