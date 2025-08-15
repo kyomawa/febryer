@@ -32,7 +32,7 @@ export async function PUT(req: NextRequest) {
     const { services, sizes, packs } = body;
 
     // Transaction pour mettre à jour toute la configuration
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: any) => {
       // Mettre à jour les services si fournis
       if (services && Array.isArray(services)) {
         await tx.service.deleteMany();

@@ -30,14 +30,14 @@ export async function GET() {
       })
     : []
   const packBySlug = new Map<string, (typeof packs)[number]>()
-  packs.forEach((p) => packBySlug.set(p.slug, p))
+  packs.forEach((p: any) => packBySlug.set(p.slug, p))
 
   const sizes = sizeIds.size
     ? await prisma.size.findMany({ where: { id: { in: [...sizeIds] } } })
     : []
-  const sizeById = new Map(sizes.map((s) => [s.id, s]))
+  const sizeById = new Map(sizes.map((s: any) => [s.id, s]))
 
-  const enriched = appts.map((a) => {
+  const enriched = appts.map((a: any) => {
     const packSlug = a.pack as string | undefined
     const sizeId = a.size as string | undefined
     
@@ -56,7 +56,7 @@ export async function GET() {
       // Si pas d'items dans le JSON, essayer de récupérer depuis le pack
       if (packSlug && packBySlug.get(packSlug)) {
         const p = packBySlug.get(packSlug)!
-        servicesResolved = p.items.map((pi) => ({
+        servicesResolved = p.items.map((pi: any) => ({
           id: pi.service.id,
           name: pi.service.name,
           price: Math.round(pi.service.price / 100), // Prix BDD en centimes → euros
@@ -72,7 +72,7 @@ export async function GET() {
       packName = p.name
       
       // Détermine si c'est un pack custom en comparant les services
-      const baseServices = p.items.map(pi => pi.service.id).sort()
+      const baseServices = p.items.map((pi: any) => pi.service.id).sort()
       const currentServices = servicesResolved.map(s => s.id).sort()
       isCustom = JSON.stringify(baseServices) !== JSON.stringify(currentServices)
     } else if (servicesResolved.length > 0) {
@@ -81,7 +81,7 @@ export async function GET() {
       packName = null
     }
 
-    const sizeLabel = sizeId ? (sizeById.get(sizeId)?.label ?? sizeId) : null
+    const sizeLabel = sizeId ? ((sizeById.get(sizeId) as any)?.label ?? sizeId) : null
     const amountTotal = a.amountTotal ? Math.round(a.amountTotal / 100) : null
 
     return {

@@ -8,6 +8,6 @@ export async function GET() {
   const sizes = await prisma.size.findMany({
     orderBy: [{ order: 'asc' }, { label: 'asc' }]
   })
-  const out = sizes.map(s => ({ id: s.id, label: s.label, mult: s.mult }))
+  const out = sizes.map((s: any) => ({ id: s.id, label: s.label, mult: s.mult }))
   return NextResponse.json({ sizes: out })
 }

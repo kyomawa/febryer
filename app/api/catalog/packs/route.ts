@@ -15,12 +15,12 @@ export async function GET() {
       }
     }
   })
-  const out = packs.map(p => ({
+  const out = packs.map((p: any) => ({
     id: p.id,
     slug: p.slug,
     name: p.name,
     desc: p.desc,
-    items: p.items.map(i => i.serviceId), // juste les ids de service
+    items: p.items.map((i: any) => i.serviceId), // juste les ids de service
   }))
   return NextResponse.json({ packs: out })
 }

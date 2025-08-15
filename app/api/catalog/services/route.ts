@@ -10,7 +10,7 @@ export async function GET() {
     orderBy: [{ group: 'asc' }, { order: 'asc' }, { name: 'asc' }],
   })
   // Groupage des services par catégorie pour l'interface client
-  const grouped = items.reduce((acc: Record<string, any[]>, s) => {
+  const grouped = items.reduce((acc: Record<string, any[]>, s: any) => {
     (acc[s.group] ||= []).push({
       id: s.id, name: s.name, price: Math.round(s.price/100), group: s.group
     })
